@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh-CH"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>正则表达式 | plainnany</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">正则表达式</h1><a id="logo" href="/.">plainnany</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于我</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">正则表达式</h1><div class="post-meta">Jul 26, 2017<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>正则表达式(Regular Expression)是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。<br>在 JavaScript中，正则表达式也是对象。JavaScript通过内置对象RegExp支持正则表达式，有两种方式创建正则表达式对象</p>
+<ol>
+<li><p>构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">RegExp</span>(pattern [, flags])</div></pre></td></tr></table></figure>
+</li>
+<li><p>字面量</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">const regex</span> = /ab+c/;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">( [ &#123; \ ^ $ <span class="string">| ) ? * + .</span></div></pre></td></tr></table></figure>
+<h3 id="预定义的特殊字符"><a href="#预定义的特殊字符" class="headerlink" title="预定义的特殊字符"></a>预定义的特殊字符</h3><table>
+<thead>
+<tr>
+<th>字符</th>
+<th>正则</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\t</td>
+<td>/\t/</td>
+<td>制表符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>/\n/</td>
+<td>制表符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>/\r/</td>
+<td>回车符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>/\f/</td>
+<td>换页符</td>
+</tr>
+<tr>
+<td>\a</td>
+<td>/\a/</td>
+<td>alert字符</td>
+</tr>
+<tr>
+<td>\e</td>
+<td>/\e/</td>
+<td>escape字符</td>
+</tr>
+<tr>
+<td>\cX</td>
+<td>/\cX/</td>
+<td>与X相对应的控制字符</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>/\b/</td>
+<td>与回退字符</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>/\v/</td>
+<td>垂直制表符</td>
+</tr>
+<tr>
+<td>\0</td>
+<td>/\0/</td>
+<td>空字符</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><p>一般情况下正则表达式一个字符（转义字符算一个）对应字符串一个字符。但是我们可以使用元字符[]来构建一个简单的类，所谓类是指，符合某些特征的对象，是一个泛指，而不是特指某个字符了，我们可以使用表达式 [abc] 把字符a或b或c归为一类，表达式可以匹配这类的字符。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/[abc]/</span>.test(<span class="string">"a"</span>)  <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/[abc]/</span>.test(<span class="string">"ab"</span>)  <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/[abc]/</span>.test(<span class="string">"abc"</span>)  <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/[abc]/</span>.test(<span class="string">"abcd"</span>)  <span class="regexp">//</span> true</div></pre></td></tr></table></figure></p>
+<h3 id="取反"><a href="#取反" class="headerlink" title="取反"></a>取反</h3><p>元字符[]组合可以创建一个类，我们还可以使用元字符^创建反向类/负向类，反向类的意思是不属于XXX类的内容，表达式 [^abc] 表示不是字符a或b或c的内容，表示匹配不能为括号里面的字符<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/[^abc]/</span>.test(<span class="string">"a"</span>)   <span class="regexp">//</span> false</div><div class="line"><span class="regexp">/[^abc]/</span>.test(<span class="string">"ab"</span>)  <span class="regexp">//</span> false</div><div class="line"><span class="regexp">/[^abc]/</span>.test(<span class="string">"hello"</span>)  <span class="regexp">//</span> true</div></pre></td></tr></table></figure></p>
+<h3 id="范围类"><a href="#范围类" class="headerlink" title="范围类"></a>范围类</h3><p>按照上面的说明如果希望匹配单个数字那么表达式是这样的<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="number">0123456789</span>]</div></pre></td></tr></table></figure></p>
+<p>有时匹配的东西过多，而且类型又相同，全部输入太麻烦，我们可以用范围类。特征就是在中间加了个横线。如<code>[0-9]</code> <code>[a-z]</code> <code>[A-Z]</code><br>要是想匹配所有字母呢？在[]组成的类内部是可以连写的，我们还可以这样写 <code>[a-zA-Z]</code></p>
+<h3 id="预定义类"><a href="#预定义类" class="headerlink" title="预定义类"></a>预定义类</h3><p>刚才使用正则我们创建了几个类，来表示数字，字母等，但这样写也很是麻烦，正则表达式为我们提供了几个常用的预定义类来匹配常见的字符</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>等价类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>[^\r\n]</td>
+<td>除了回车符和换行符之外的所有字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>[0-9]</td>
+<td>数字字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>[^0-9]</td>
+<td>非数字字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>[\t\n\x0B\f\r]</td>
+<td>空白符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>[^\t\n\x0B\f\r]</td>
+<td>非空白符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>[a-zA-Z_0-9]</td>
+<td>单词字符，字母、数字下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>[^a-zA-Z_0-9]</td>
+<td>非单词字符</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/\d/</span>.test(<span class="string">"3"</span>) <span class="regexp">//</span>true</div><div class="line"><span class="regexp">/\d/</span>.test(<span class="string">"s"</span>) <span class="regexp">//</span> false</div><div class="line"><span class="regexp">/\D/</span>.test(<span class="string">"3"</span>)  <span class="regexp">//</span> false</div><div class="line"><span class="regexp">/\s/</span>.test(<span class="string">" "</span>) <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/./</span>.test(<span class="string">"哈哈"</span>)  <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/\w/</span>.test(<span class="string">"正则"</span>)</div></pre></td></tr></table></figure>
+<h3 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h3><p>正则表达式还提供了几个常用的边界匹配字符</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>以xxx开头</td>
+<td>注意不能紧跟于左中括号的后面</td>
+</tr>
+<tr>
+<td>$</td>
+<td>以xxx结尾</td>
+<td></td>
+</tr>
+<tr>
+<td>\b</td>
+<td>单词边界</td>
+<td>指[a-zA-Z_0-9]之外的字符</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非单词边界</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">/c</span>+$<span class="string">/.test</span><span class="params">('abc')</span>  <span class="string">//</span> <span class="literal">true</span></div><div class="line"><span class="string">/c</span>+$<span class="string">/.test</span><span class="params">('abcd')</span> <span class="string">//</span> <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p>单词边界举例。要匹配的东西的前端或未端不能为英文字母阿拉伯字数字或下横线。<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">var</span> <span class="keyword">str </span>= <span class="string">"12w-eefd&amp;efrew"</span><span class="comment">;</span></div><div class="line"><span class="keyword">str.match(/\b\w+\b/g) </span>// [<span class="string">"12w"</span>, <span class="string">"eefd"</span>, <span class="string">"efrew"</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><p>之前我们介绍的方法都是一一匹配的，如果我们希望匹配一个连续出现很多次数字的字符串难道我们需要写成这样<code>\d\d\d\d...</code>，为此正则表达式引入了一些量词</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?</td>
+<td>出现零次或一次（最多出现一次）</td>
+</tr>
+<tr>
+<td>+</td>
+<td>出现一次或多次（至少出现一次）</td>
+</tr>
+<tr>
+<td>*</td>
+<td>出现零次或多次（任意次）</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>出现n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>出现n到m次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>至少出现n次</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/\d&#123;<span class="number">6</span>&#125;/.test(<span class="string">"123456"</span>)  <span class="comment">// true</span></div><div class="line">/\d&#123;<span class="number">6</span>&#125;/.test(<span class="string">"1234567"</span>) <span class="comment">// true</span></div><div class="line">/\d&#123;<span class="number">6</span>&#125;/.test(<span class="string">"12345"</span>) <span class="comment">// false</span></div><div class="line">/\d&#123;<span class="number">6</span>,<span class="number">8</span>&#125;/.test(<span class="string">"123456789"</span>)  <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h3 id="贪婪模式与非贪婪模式"><a href="#贪婪模式与非贪婪模式" class="headerlink" title="贪婪模式与非贪婪模式"></a>贪婪模式与非贪婪模式</h3><p>贪婪模式，量词在默认下是尽可能多的匹配的，以这个表达式为例：a.*b，它将会匹配最长的以a开始，以b结束的字符串，如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'aabab'</span>.match(<span class="regexp">/a.*b/g</span>) <span class="regexp">//</span> [<span class="string">"aabab"</span>]</div></pre></td></tr></table></figure></p>
+<p>非贪婪模式，让正则表达式尽可能少的匹配，也就是说一旦成功匹配不再继续尝试，做法很简单，在量词后加上?即可<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">'aabab'</span>.match(<span class="regexp">/a.*?b/g</span>) <span class="regexp">//</span> [<span class="string">"aab"</span>,<span class="string">"ab"</span>]</div></pre></td></tr></table></figure></p>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>到目前为止，我们只能一个字符到匹配，虽然量词的出现，能帮助我们处理一排密紧密相连的同类型字符。但这是不够的，下面该轮到小括号出场了，中括号表示范围内选择，大括号表示重复次数。小括号允许我们重复多个字符。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/(cat)&#123;3&#125;/</span>.test(<span class="string">'catcatcatcat'</span>)  <span class="regexp">//</span> true</div><div class="line"><span class="regexp">/(cat)&#123;3&#125;/</span>.test(<span class="string">'catcat'</span>)  <span class="regexp">//</span> false</div></pre></td></tr></table></figure></p>
+<p>如果希望匹配cat或dog出现3次该怎么办呢？可以使用字符｜达到或的功效<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/(cat|dog)&#123;3&#125;/</span>.test(<span class="string">'catcatcatdogdogdog'</span>) <span class="regexp">//</span> true</div></pre></td></tr></table></figure></p>
+<h3 id="反向分组"><a href="#反向分组" class="headerlink" title="反向分组"></a>反向分组</h3><p>反向引用标识由正则表达式中的匹配组捕获的子字符串。每个反向引用都由一个编号或名称来标识，并通过“\编号”表示法进行引用。<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/(dog)\1/</span>.test(<span class="string">"dogdog"</span>) <span class="regexp">//</span> true</div></pre></td></tr></table></figure></p>
+<h2 id="前瞻"><a href="#前瞻" class="headerlink" title="前瞻"></a>前瞻</h2><p>继续在分组内做文章。前瞻与后瞻其实都属于零宽断言，但javascript不支持后瞻。</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exp1(?=exp2)</td>
+<td>匹配后面是exp2的exp1</td>
+</tr>
+<tr>
+<td>exp1(?!exp2)</td>
+<td>匹配后面不是exp2的exp1</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="regexp">/hello(?=world)/g</span>).exec(<span class="string">'helloworld12333'</span>)  <span class="regexp">//</span> [<span class="string">'hello'</span>]</div><div class="line">(<span class="regexp">/hello(?=world)/g</span>).exec(<span class="string">'hellonextworld'</span>)  <span class="regexp">//</span> null</div></pre></td></tr></table></figure>
+<h3 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h3><table>
+<thead>
+<tr>
+<th>实例属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>global</td>
+<td>是当前表达式模式首次匹配内容的开始位置，从0开始计数。其初始值为-1，每次成功匹配时，index属性都会随之改变。</td>
+</tr>
+<tr>
+<td>ignoreCase</td>
+<td>返回创建RegExp对象实例时指定的ignoreCase标志（i）的状态。如果创建RegExp对象实例时设置了i标志，该属性返回True，否则返回False，默认值为False。</td>
+</tr>
+<tr>
+<td>lastIndex</td>
+<td>是当前表达式模式首次匹配内容中最后一个字符的下一个位置，从0开始计数，常被作为继续搜索时的起始位置，初始值为-1， 表示从起始位置开始搜索，每次成功匹配时，lastIndex属性值都会随之改变。(只有使用exec()或test()方法才会填入，否则为0)</td>
+</tr>
+<tr>
+<td>multiLine</td>
+<td>返回创建RegExp对象实例时指定的multiLine标志（m）的状态。如果创建RegExp对象实例时设置了m标志，该属性返回True，否则返回False，默认值为False。</td>
+</tr>
+<tr>
+<td>source</td>
+<td>返回创建RegExp对象实例时指定的表达式文本字符串。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="http://www.cnblogs.com/rubylouvre/archive/2010/03/09/1681222.html" target="_blank" rel="external">司徒正美 javascript正则表达式</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="external">MDN 正则表达式</a></li>
+<li><a href="http://book.jirengu.com/fe/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/Javascript/%E6%AD%A3%E5%88%99%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95.html" target="_blank" rel="external">饥人谷 课件</a> </li>
+</ol>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2017/07/26/正则表达式/" data-id="cj5jt8rvb000l08tdduy7hcha" class="article-share-link">分享</a><div class="tags"><a href="/tags/正则/">正则</a></div><div class="post-nav"><a href="/2017/07/17/译文：渲染树的构造、布局和绘制/" class="next">译文：渲染树的构造、布局和绘制</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/DOM事件/" style="font-size: 15px;">DOM事件</a> <a href="/tags/学习flex/" style="font-size: 15px;">学习flex</a> <a href="/tags/时间/" style="font-size: 15px;">时间</a> <a href="/tags/学习方法/" style="font-size: 15px;">学习方法</a> <a href="/tags/函数/" style="font-size: 15px;">函数</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/浏览器渲染/" style="font-size: 15px;">浏览器渲染</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/26/正则表达式/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/译文：渲染树的构造、布局和绘制/">译文：渲染树的构造、布局和绘制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/06/e-target与e-currentTarget的区别/">e.target与e.currentTarget的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/03/关于如何学习/">关于如何学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/关注点分离/">关注点分离</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/26/var与let的区别/">var与let</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/事件委托/">事件委托</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/DOM0、DOM1、DOM2级事件/">DOM0、DOM1、DOM2级事件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/事件冒泡与事件捕获/">事件冒泡与事件捕获</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/浏览器内核简介/">浏览器内核简介</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://www.github.com/plainnany" title="我的github" target="_blank">我的github</a><ul></ul><a href="http://www.jianshu.com/u/626f97d17630" title="我的简书" target="_blank">我的简书</a><ul></ul><a href="https://www.haomwei.com/" title="屠城的博客" target="_blank">屠城的博客</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">plainnany.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
